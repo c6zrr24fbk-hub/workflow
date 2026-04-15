@@ -3,12 +3,12 @@ WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
 COPY . .
-# Отключаем CGO и собираем статический бинарник под Linux
 RUN CGO_ENABLED=0 GOOS=linux go build -o app .
 
 FROM alpine:latest
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 COPY --from=builder /app/app .
+COPY --from=builder /app/tracker.db .   
 EXPOSE 8080
 CMD ["./app"]
