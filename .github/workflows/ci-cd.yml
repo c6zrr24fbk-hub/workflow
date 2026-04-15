@@ -51,7 +51,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ secrets.polyy123 }}/pooly
+          images: ${{ secrets.DOCKERR }}/pooly
           tags: |
             type=ref,event=tag
             type=raw,value=latest
